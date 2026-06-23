@@ -20,6 +20,7 @@ A simple personal portfolio website built using HTML, CSS, and JavaScript.
 
 ## Project Structure
 
+```text
 portfolio-website/
 │
 ├── index.html
@@ -27,6 +28,7 @@ portfolio-website/
 ├── script.js
 ├── assets/
 └── README.md
+````
 
 ## How to Run
 
