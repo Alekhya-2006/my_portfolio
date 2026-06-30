@@ -1,4 +1,6 @@
+// =========================
 // Theme Toggle
+// =========================
 
 const themeToggle = document.getElementById("theme-toggle");
 
@@ -9,23 +11,24 @@ themeToggle.addEventListener("click", () => {
     if (document.body.classList.contains("dark-mode")) {
 
         localStorage.setItem("theme", "dark");
-
         themeToggle.innerHTML =
             '<i class="fa-solid fa-sun"></i>';
 
     } else {
 
         localStorage.setItem("theme", "light");
-
         themeToggle.innerHTML =
             '<i class="fa-solid fa-moon"></i>';
+
     }
+
 });
 
-
+// =========================
 // Load Saved Theme
+// =========================
 
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
 
     const savedTheme = localStorage.getItem("theme");
 
@@ -35,40 +38,72 @@ window.addEventListener("load", () => {
 
         themeToggle.innerHTML =
             '<i class="fa-solid fa-sun"></i>';
+
     }
+
 });
 
+// =========================
+// Navbar Shadow on Scroll
+// =========================
 
-// Back To Top Button
-
-const backToTop = document.getElementById("backToTop");
+const navbar = document.querySelector(".navbar");
 
 window.addEventListener("scroll", () => {
 
-    if (window.scrollY > 300) {
+    if (window.scrollY > 20) {
+
+        navbar.style.boxShadow =
+            "0 8px 20px rgba(0,0,0,0.08)";
+
+    } else {
+
+        navbar.style.boxShadow =
+            "0 3px 15px rgba(0,0,0,0.05)";
+
+    }
+
+});
+
+// =========================
+// Back To Top Button
+// =========================
+
+const backToTop =
+    document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 350) {
 
         backToTop.style.display = "block";
 
     } else {
 
         backToTop.style.display = "none";
+
     }
+
 });
 
 backToTop.addEventListener("click", () => {
 
     window.scrollTo({
+
         top: 0,
+
         behavior: "smooth"
+
     });
 
 });
 
-
+// =========================
 // Scroll Reveal Animation
+// =========================
 
-const sections = document.querySelectorAll(
-    ".section, .highlight-card"
+const revealElements = document.querySelectorAll(
+    ".section, .highlight-card, .skill-box, .project-card, .timeline-item, .goal-card, .contact-card"
 );
 
 const observer = new IntersectionObserver(
@@ -80,6 +115,7 @@ const observer = new IntersectionObserver(
             if (entry.isIntersecting) {
 
                 entry.target.classList.add("show");
+
             }
 
         });
@@ -87,68 +123,80 @@ const observer = new IntersectionObserver(
     },
 
     {
+
         threshold: 0.15
+
     }
 
 );
 
-sections.forEach((section) => {
+revealElements.forEach((element) => {
 
-    section.classList.add("hidden");
+    element.classList.add("hidden");
 
-    observer.observe(section);
+    observer.observe(element);
 
 });
 
-
+// =========================
 // Active Navigation Link
+// =========================
 
 const navLinks =
     document.querySelectorAll(".nav-links a");
 
+const sections =
+    document.querySelectorAll("section[id]");
+
 window.addEventListener("scroll", () => {
 
-    let currentSection = "";
+    let current = "";
 
-    document.querySelectorAll("section").forEach(
-        (section) => {
+    sections.forEach((section) => {
 
-            const sectionTop =
-                section.offsetTop - 120;
+        const sectionTop =
+            section.offsetTop - 140;
 
-            const sectionHeight =
-                section.clientHeight;
+        const sectionHeight =
+            section.offsetHeight;
 
-            if (
-                pageYOffset >= sectionTop
-                &&
-                pageYOffset <
-                sectionTop + sectionHeight
-            ) {
+        if (
 
-                currentSection =
-                    section.getAttribute("id");
-            }
+            window.scrollY >= sectionTop &&
+            window.scrollY <
+            sectionTop + sectionHeight
+
+        ) {
+
+            current =
+                section.getAttribute("id");
+
         }
-    );
+
+    });
 
     navLinks.forEach((link) => {
 
         link.classList.remove("active");
 
         if (
-            link.getAttribute("href")
-            === `#${currentSection}`
+
+            link.getAttribute("href") ===
+            `#${current}`
+
         ) {
 
             link.classList.add("active");
+
         }
+
     });
 
 });
 
-
-// Hero Buttons Hover Effect
+// =========================
+// Button Hover Effect
+// =========================
 
 const buttons =
     document.querySelectorAll(".btn");
@@ -158,20 +206,42 @@ buttons.forEach((button) => {
     button.addEventListener("mouseenter", () => {
 
         button.style.transform =
-            "translateY(-2px)";
+            "translateY(-3px)";
+
     });
 
     button.addEventListener("mouseleave", () => {
 
         button.style.transform =
             "translateY(0)";
+
     });
 
 });
 
+// =========================
+// Project Card Hover
+// =========================
 
+const cards =
+    document.querySelectorAll(".project-card");
+
+cards.forEach((card) => {
+
+    card.addEventListener("mouseenter", () => {
+
+        card.style.transition =
+            "0.3s ease";
+
+    });
+
+});
+
+// =========================
 // Console Signature
+// =========================
 
 console.log(
-    "Portfolio Designed and Developed by Alekhya Nimmala"
+    "%cPortfolio Designed & Developed by Alekhya Nimmala",
+    "color:#2563eb;font-size:15px;font-weight:bold;"
 );
