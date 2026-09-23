@@ -26,7 +26,7 @@ portfolio-website/
 ├── index.html
 ├── style.css
 ├── script.js
-├── assets/
+├── resume/
 └── README.md
 ````
 
